@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import axios from "axios";
 
 export class ImpicitGrantController{
     public login=async (req:Request,res:Response)=>{
@@ -7,10 +7,17 @@ export class ImpicitGrantController{
         res.redirect(url);
     }
     public callback=async (req:Request,res:Response)=>{
-
         const data=JSON.stringify(req.body, null, 2);
+        res.cookie("access_token",req.body.access_token);
         res.json({
             message:"callback completed succesfully for implicit grant go to /profile to see the profile",
+            data:data
+        });
+    }
+    public profile=async (req:Request,res:Response)=>{
+        const {data}= await axios.get(`https://${process.env.AUTH0_DOMAIN}/userinfo`,{headers:{Authorization:`Bearer ${req.cookies.access_token}`}});
+        res.json({
+            message:"profile",
             data:data
         });
     }

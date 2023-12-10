@@ -6,3 +6,4 @@ export const  implicitGrantRouter = Router();
 
 implicitGrantRouter.get("/login",implicitController.login);
 implicitGrantRouter.post("/callback",implicitController.callback);
+implicitGrantRouter.get("/profile",implicitController.profile);
