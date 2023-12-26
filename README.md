@@ -65,12 +65,12 @@ This repository showcases the implementation of the Various Grant flows using Op
 The Implicit Grant Flow is an OAuth 2.0 flow specifically designed for single-page applications (SPAs). It allows the client-side application to obtain access tokens directly from the authorization server, without the need for a backend server.
 
 
-![Alt text](image.png)
+![Implicit Grant Flow Diagram](image.png)
 
 #### Steps in the Implicit Grant Flow:
 
 1. **User Initiation:**
-   The user access "/grant/implicit_grant/login" in the app.
+   The user access `/grant/implicit_grant/login` in the app.
 
 2. **Redirect to Authorization Server:**
    The user is redirected to the Auth0 Authorization Server, passing necessary parameters such as client ID, scope, and redirect URI.
@@ -79,29 +79,45 @@ The Implicit Grant Flow is an OAuth 2.0 flow specifically designed for single-pa
    The user authenticates with the Authorization Server, which may involve logging in and granting consent to requested permissions.
 
 4. **Token Response:**
-   Upon successful authentication, the Authorization Server issues an ID token and an access token directly to the callbcak endpoint specified during the 2nd step "/grant/implicit_grant/callback".
+   Upon successful authentication, the Authorization Server issues an ID token and an access token directly to the callbcak endpoint specified during the 2nd step `/grant/implicit_grant/callback`.
 
 5. **Token Usage:**
    The SPA can then use the obtained access token to make authorized API requests on behalf of the authenticated user.
 
 6. **Validating Token:**
-   Retrieve the dat of the user by accessing the "/grant/implicit_grant/profile" endpoint.
-
-#### Additional Auth0 Configuration
-
-To use the Implicit Grant Flow with Auth0, follow these additional configuration steps:
-
-1. **Create an Auth0 Application:**
-   Set up a new Auth0 application and configure it for Single Page Applications.
-
-2. **Specify Allowed Callback URLs:**
-   Define the callback URL(s) in the Auth0 dashboard to ensure secure redirection after authentication.
-
-3. **Set Scopes:**
-   Configure the scopes requested during the authentication process. Scopes determine the level of access the application is requesting.
+   Retrieve the dat of the user by accessing the `/grant/implicit_grant/profile` endpoint.
 
 
-Remember to include these details in your README to guide users through the setup process for your specific implementation. Additionally, provide clear instructions on where users can find and configure these settings in the Auth0 dashboard.
+![Authorization Code Flow Diagram](Auth_Code_Flow.png)
+
+### Authorization Code Flow:-
+   The Authorization Code is like a special key that helps your app securely talk to a club (the authorization server). You get this key after proving who you are and what you want to do. Once you have it, you can exchange it for access to certain things (like making requests to the server) on behalf of the user. It's a short-lived, secure pass that ensures safe communication between your app and the authorization server.
+
+#### Steps in the Authorization Code  Flow:
+
+1. **User Login:**
+   Users initiate authentication by selecting the Login option within the application .
+
+2. **Redirect to Auth0:**
+   Auth0's SDK redirects users to the Auth0 Authorization Server using the `/grant/authorization_code/login` endpoint.
+
+3. **Login and Authorization:**
+   Users are redirected to the login and authorization prompt, where they authenticate and may provide consent for requested permissions.
+
+4. **Authorization Code Issued:**
+   Users are redirected back to the application with a single-use authorization code at `/grant/authorization_code/callback`.
+
+5. **Token Retrieval:**
+   Auth0's SDK sends the authorization code, client ID, and application credentials to the Auth0 Authorization Server using the `/oauth/token` endpoint.
+
+6. **Verification and Token Issuance:**
+   The Auth0 Authorization Server verifies the authorization code and issues an ID token and access token.
+
+7. **Profile  Access:**
+   The application uses the access token to call an API at the `/grant/authorization_code/profile` endpoint and retrieve user data.
+
+
+
 
 ## Contributing
 
@@ -109,6 +125,6 @@ We welcome contributions! Feel free to submit issues or pull requests.
 
 ## Future Flows
 
-This repository is designed to accommodate additional authentication flows in the future. Contributions for other flows, such as Authorization Code or Device Flow, are highly encouraged.
+This repository is designed to accommodate additional authentication flows in the future. Contributions for other flows, such as Device Flow, are highly encouraged.
 
 
