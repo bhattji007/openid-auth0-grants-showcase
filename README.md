@@ -13,7 +13,7 @@ This repository serves as a showcase for implementing the Implicit Grant flow wi
     - [Auth0](#auth0)
     - [OpenID](#openid)
     - [Implicit Grant Flow](#implicit-grant-flow)
-    - [Additional Auth0 Configuration](#additional-auth0-configuration)
+    - [Authorization Code Flow](#authorization-code-flow)
 4. [Contributing](#contributing)
 5. [Future Flows](#future-flows)
 6. [Screenshots](#screenshots)
